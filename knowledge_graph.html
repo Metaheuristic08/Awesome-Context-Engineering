@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph - Awesome Context Engineering Repository</title>
+    <script>
+        // Define fallback function first
+        function loadMermaidFallback() {
+            console.log('Mermaid CDN failed, loading fallback...');
+            // Create a simple text-based diagram fallback
+            setTimeout(function() {
+                const mermaidDiv = document.querySelector('.mermaid');
+                if (mermaidDiv && !window.mermaid) {
+                    mermaidDiv.innerHTML = `
+                        <div style="font-family: monospace; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 2px solid #dee2e6;">
+                            <h3 style="text-align: center; margin-bottom: 20px; color: #495057;">📊 Repository Structure Diagram</h3>
+                            <div style="line-height: 1.8; font-size: 14px;">
+                                <div style="margin: 10px 0;"><strong>🏛️ Awesome Context Engineering Repository</strong></div>
+                                <div style="margin-left: 20px;">
+                                    <div>├── 📚 <strong>Documentation & Configuration</strong></div>
+                                    <div style="margin-left: 20px;">
+                                        <div>├── 📖 README.md (1,855 lines) - Comprehensive Survey</div>
+                                        <div>├── ⚖️ LICENSE - MIT License</div>
+                                        <div>├── 🚫 .gitignore - Standard Ignore Patterns</div>
+                                        <div>└── 🎨 cover.png (2.2MB) - Repository Cover</div>
+                                    </div>
+                                    <div>├── 📁 <strong>Assets</strong></div>
+                                    <div style="margin-left: 20px;">
+                                        <div>└── 💬 wechat_group.png - Community QR Code</div>
+                                    </div>
+                                    <div>├── 🧠 <strong>Content Domains</strong> (from README analysis)</div>
+                                    <div style="margin-left: 20px;">
+                                        <div>├── 🔧 Context Engineering - Core Concepts</div>
+                                        <div>├── 📊 Related Surveys - Academic References</div>
+                                        <div>├── ⚙️ Techniques & Architectures - Implementation Methods</div>
+                                        <div>├── 📈 Evaluation Paradigms - Assessment Methods</div>
+                                        <div>└── 🚀 Applications - Real-world Systems</div>
+                                    </div>
+                                    <div>├── 🎓 <strong>Academic Structure</strong> (from README content)</div>
+                                    <div style="margin-left: 20px;">
+                                        <div>├── 📐 Mathematical Definitions - Formal Framework</div>
+                                        <div>├── 🧮 Memory Systems - RAG & Retrieval</div>
+                                        <div>├── 🤝 Agent Communication - Multi-agent Systems</div>
+                                        <div>├── 🛠️ Tool Use & Function Calling - Integration Methods</div>
+                                        <div>└── 🔮 Future Directions - Research Opportunities</div>
+                                    </div>
+                                    <div>└── ❌ <strong>Missing Components</strong> (analysis findings)</div>
+                                    <div style="margin-left: 20px;">
+                                        <div>├── 💻 Source Code - Implementation Examples</div>
+                                        <div>├── 🧪 Tests - Validation Scripts</div>
+                                        <div>├── ⚡ CI/CD - Automation Pipeline</div>
+                                        <div>├── 📝 Examples - Usage Demonstrations</div>
+                                        <div>└── 🌐 Documentation Site - Static Site Generation</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 6px; border-left: 4px solid #2196f3;">
+                                <strong>ℹ️ Note:</strong> This is a fallback text diagram. For the interactive Mermaid visualization, 
+                                please ensure internet connectivity or view the .mmd file directly.
+                            </div>
+                        </div>
+                    `;
+                }
+            }, 1000);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js" 
+            onerror="loadMermaidFallback()"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .graph-container {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+            background: white;
+        }
+
+        .sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #3498db;
+            font-size: 1.3rem;
+        }
+
+        .sidebar h3 {
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .sidebar p, .sidebar li {
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .sidebar ul {
+            padding-left: 20px;
+        }
+
+        .metric {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .metric .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .metric .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .status.present {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.suggested {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .recommendation {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .timestamp {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .legend h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .mermaid {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+                max-height: 40vh;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="timestamp">
+                📅 Generated: January 8, 2025<br>
+                🔍 Analysis Version: 1.0<br>
+                📊 Repository Scan: Complete
+            </div>
+
+            <h2>📈 Repository Metrics</h2>
+            <div class="metric">
+                <div class="value">5</div>
+                <div class="label">Total Files</div>
+            </div>
+            <div class="metric">
+                <div class="value">1,855</div>
+                <div class="label">Lines in README.md</div>
+            </div>
+            <div class="metric">
+                <div class="value">2.2MB</div>
+                <div class="label">Cover Image Size</div>
+            </div>
+
+            <h2>🏗️ Repository Structure Analysis</h2>
+            
+            <h3>📁 File Status Overview</h3>
+            <p><span class="status present">Present:</span> Core documentation files</p>
+            <p><span class="status missing">Missing:</span> Implementation components</p>
+            <p><span class="status suggested">Suggested:</span> Enhancement opportunities</p>
+
+            <h3>🔍 Orphan Files Identification</h3>
+            <p><strong>No true orphan files detected.</strong> All files serve clear purposes:</p>
+            <ul>
+                <li>📖 README.md - Central survey document</li>
+                <li>⚖️ LICENSE - Legal framework</li>
+                <li>🚫 .gitignore - Version control rules</li>
+                <li>🎨 cover.png - Visual branding</li>
+                <li>💬 wechat_group.png - Community engagement</li>
+            </ul>
+
+            <h3>❌ Missing Components Analysis</h3>
+            <div class="recommendation">
+                <strong>Academic Repository Gaps:</strong>
+                <ul>
+                    <li><span class="status missing">Source Code</span> - Implementation examples for techniques</li>
+                    <li><span class="status missing">Tests</span> - Validation scripts for concepts</li>
+                    <li><span class="status missing">CI/CD</span> - Automated quality checks</li>
+                    <li><span class="status missing">Examples</span> - Practical usage demonstrations</li>
+                    <li><span class="status missing">Docs Site</span> - Static site generation for better navigation</li>
+                </ul>
+            </div>
+
+            <h3>🔧 Refactoring Suggestions</h3>
+            <div class="recommendation">
+                <strong>Immediate Improvements:</strong>
+                <ol>
+                    <li><strong>Content Organization:</strong> Split README.md into modular sections</li>
+                    <li><strong>Interactive Examples:</strong> Add Jupyter notebooks demonstrating concepts</li>
+                    <li><strong>Automated Validation:</strong> Implement link checking for 500+ references</li>
+                    <li><strong>Community Structure:</strong> Add CONTRIBUTING.md and PULL_REQUEST_TEMPLATE</li>
+                </ol>
+            </div>
+
+            <h3>📋 Repository Recommendations</h3>
+            <div class="recommendation">
+                <strong>For Academic Survey Repositories:</strong>
+                <ul>
+                    <li>📚 Create <code>/docs</code> folder with categorized content</li>
+                    <li>📝 Add <code>/examples</code> with practical implementations</li>
+                    <li>🔍 Implement automated paper metadata validation</li>
+                    <li>🌐 Deploy GitHub Pages for better discoverability</li>
+                    <li>📊 Add visualization tools for survey statistics</li>
+                    <li>🏷️ Implement topic tagging system</li>
+                </ul>
+            </div>
+
+            <h3>🎯 Quality Assessment</h3>
+            <p><strong>Repository Health:</strong> <span class="status present">Excellent</span></p>
+            <p><strong>Content Completeness:</strong> <span class="status present">Very High</span></p>
+            <p><strong>Academic Rigor:</strong> <span class="status present">Outstanding</span></p>
+            <p><strong>Implementation Readiness:</strong> <span class="status missing">Low</span></p>
+            <p><strong>Community Engagement:</strong> <span class="status suggested">Moderate</span></p>
+
+            <div class="legend">
+                <h4>🎨 Graph Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #e1f5fe; border-color: #01579b;"></div>
+                    <span>Files & Documents</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #fff3e0; border-color: #e65100;"></div>
+                    <span>Content Domains</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #e8f5e8; border-color: #1b5e20;"></div>
+                    <span>Configuration</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ffebee; border-color: #c62828; border-style: dashed;"></div>
+                    <span>Missing Components</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>🧠 Knowledge Graph Visualization</h1>
+                <p>Interactive Repository Structure Analysis - Awesome Context Engineering</p>
+            </header>
+
+            <div class="graph-container">
+                <div class="mermaid">
+graph TD
+    %% Repository Structure Knowledge Graph
+    %% Generated on 2025-01-08 for Awesome Context Engineering Repository
+    
+    %% Root Repository Node
+    repo["🏛️ Awesome Context Engineering<br/>Academic Survey Repository"]
+    
+    %% Documentation & Configuration Subgraph
+    subgraph docs["📚 Documentation & Configuration"]
+        readme["📖 README.md<br/>(1855 lines)<br/>Comprehensive Survey"]
+        license["⚖️ LICENSE<br/>MIT License"]
+        gitignore["🚫 .gitignore<br/>Standard Ignore Patterns"]
+        cover["🎨 cover.png<br/>(2.2MB)<br/>Repository Cover"]
+    end
+    
+    %% Assets Subgraph
+    subgraph assets_group["📁 Assets"]
+        wechat["💬 wechat_group.png<br/>Community QR Code"]
+    end
+    
+    %% Content Domains Subgraph (Virtual - from README analysis)
+    subgraph content_domains["🧠 Content Domains"]
+        context_eng["🔧 Context Engineering<br/>Core Concepts"]
+        related_surveys["📊 Related Surveys<br/>Academic References"]
+        techniques["⚙️ Techniques & Architectures<br/>Implementation Methods"]
+        evaluation["📈 Evaluation Paradigms<br/>Assessment Methods"]
+        applications["🚀 Applications<br/>Real-world Systems"]
+    end
+    
+    %% Academic Structure Subgraph (Virtual - from README content)
+    subgraph academic_structure["🎓 Academic Structure"]
+        definitions["📐 Mathematical Definitions<br/>Formal Framework"]
+        memory_systems["🧮 Memory Systems<br/>RAG & Retrieval"]
+        agent_comm["🤝 Agent Communication<br/>Multi-agent Systems"]
+        tool_use["🛠️ Tool Use & Function Calling<br/>Integration Methods"]
+        future_work["🔮 Future Directions<br/>Research Opportunities"]
+    end
+    
+    %% Missing Components Subgraph (Analysis findings)
+    subgraph missing["❌ Missing Components"]
+        source_code["💻 Source Code<br/>Implementation Examples"]
+        tests["🧪 Tests<br/>Validation Scripts"]
+        ci_cd["⚡ CI/CD<br/>Automation Pipeline"]
+        examples["📝 Examples<br/>Usage Demonstrations"]
+        docs_site["🌐 Documentation Site<br/>Static Site Generation"]
+    end
+    
+    %% Relationships - Repository to Main Components
+    repo --> docs
+    repo --> assets_group
+    repo --> content_domains
+    repo --> academic_structure
+    repo --> missing
+    
+    %% Documentation Internal Relationships
+    readme --> context_eng
+    readme --> related_surveys
+    readme --> techniques
+    readme --> evaluation
+    readme --> applications
+    readme --> definitions
+    readme --> memory_systems
+    readme --> agent_comm
+    readme --> tool_use
+    readme --> future_work
+    
+    %% Asset Relationships
+    wechat --> readme
+    cover --> readme
+    
+    %% Cross-domain Relationships
+    context_eng --> definitions
+    techniques --> memory_systems
+    techniques --> agent_comm
+    techniques --> tool_use
+    evaluation --> applications
+    applications --> future_work
+    
+    %% Missing Component Relationships (what should exist)
+    source_code -.->|"Should implement"| techniques
+    tests -.->|"Should validate"| source_code
+    ci_cd -.->|"Should automate"| tests
+    examples -.->|"Should demonstrate"| techniques
+    docs_site -.->|"Should organize"| readme
+    
+    %% Styling Classes
+    classDef fileNode fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef functionNode fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
+    classDef configNode fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px,color:#000
+    classDef contentNode fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
+    classDef missingNode fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000,stroke-dasharray: 5 5
+    classDef repoNode fill:#f1f8e9,stroke:#33691e,stroke-width:3px,color:#000
+    
+    %% Apply Styling
+    class repo repoNode
+    class readme,cover,wechat fileNode
+    class license,gitignore configNode
+    class context_eng,related_surveys,techniques,evaluation,applications,definitions,memory_systems,agent_comm,tool_use,future_work contentNode
+    class source_code,tests,ci_cd,examples,docs_site missingNode
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize Mermaid with configuration
+        function initializeMermaid() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'base',
+                    themeVariables: {
+                        primaryColor: '#ffffff',
+                        primaryTextColor: '#000000',
+                        primaryBorderColor: '#cccccc',
+                        lineColor: '#666666',
+                        secondaryColor: '#f8f9fa',
+                        tertiaryColor: '#e9ecef'
+                    },
+                    flowchart: {
+                        useMaxWidth: true,
+                        htmlLabels: true,
+                        curve: 'cardinal'
+                    },
+                    securityLevel: 'loose'
+                });
+                console.log('Mermaid initialized successfully');
+            } else {
+                console.log('Mermaid not available, using fallback');
+                loadMermaidFallback();
+            }
+        }
+
+        // Add interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Mermaid
+            setTimeout(initializeMermaid, 500);
+            
+            // Add click handlers for better UX
+            const graphContainer = document.querySelector('.graph-container');
+            
+            // Add zoom controls
+            const controls = document.createElement('div');
+            controls.style.cssText = `
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: rgba(255,255,255,0.9);
+                border-radius: 8px;
+                padding: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+            `;
+            controls.innerHTML = `
+                <button onclick="zoomIn()" style="margin: 2px; padding: 5px 10px; border: none; border-radius: 4px; background: #3498db; color: white; cursor: pointer;">Zoom In</button>
+                <button onclick="zoomOut()" style="margin: 2px; padding: 5px 10px; border: none; border-radius: 4px; background: #3498db; color: white; cursor: pointer;">Zoom Out</button>
+                <button onclick="resetZoom()" style="margin: 2px; padding: 5px 10px; border: none; border-radius: 4px; background: #95a5a6; color: white; cursor: pointer;">Reset</button>
+            `;
+            
+            graphContainer.style.position = 'relative';
+            graphContainer.appendChild(controls);
+            
+            // Add timestamp update
+            console.log('Knowledge Graph loaded successfully at ' + new Date().toLocaleString());
+        });
+
+        // Zoom functionality
+        let currentZoom = 1;
+        
+        function zoomIn() {
+            currentZoom *= 1.2;
+            applyZoom();
+        }
+        
+        function zoomOut() {
+            currentZoom *= 0.8;
+            applyZoom();
+        }
+        
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+        
+        function applyZoom() {
+            const mermaidDiv = document.querySelector('.mermaid');
+            if (mermaidDiv) {
+                mermaidDiv.style.transform = `scale(${currentZoom})`;
+                mermaidDiv.style.transformOrigin = 'top left';
+            }
+        }
+    </script>
+</body>
+</html>

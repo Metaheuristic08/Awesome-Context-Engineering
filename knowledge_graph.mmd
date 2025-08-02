@@ -1,0 +1,99 @@
+graph TD
+    %% Repository Structure Knowledge Graph
+    %% Generated on 2025-01-08 for Awesome Context Engineering Repository
+    
+    %% Root Repository Node
+    repo["🏛️ Awesome Context Engineering<br/>Academic Survey Repository"]
+    
+    %% Documentation & Configuration Subgraph
+    subgraph docs["📚 Documentation & Configuration"]
+        readme["📖 README.md<br/>(1855 lines)<br/>Comprehensive Survey"]
+        license["⚖️ LICENSE<br/>MIT License"]
+        gitignore["🚫 .gitignore<br/>Standard Ignore Patterns"]
+        cover["🎨 cover.png<br/>(2.2MB)<br/>Repository Cover"]
+    end
+    
+    %% Assets Subgraph
+    subgraph assets_group["📁 Assets"]
+        wechat["💬 wechat_group.png<br/>Community QR Code"]
+    end
+    
+    %% Content Domains Subgraph (Virtual - from README analysis)
+    subgraph content_domains["🧠 Content Domains"]
+        context_eng["🔧 Context Engineering<br/>Core Concepts"]
+        related_surveys["📊 Related Surveys<br/>Academic References"]
+        techniques["⚙️ Techniques & Architectures<br/>Implementation Methods"]
+        evaluation["📈 Evaluation Paradigms<br/>Assessment Methods"]
+        applications["🚀 Applications<br/>Real-world Systems"]
+    end
+    
+    %% Academic Structure Subgraph (Virtual - from README content)
+    subgraph academic_structure["🎓 Academic Structure"]
+        definitions["📐 Mathematical Definitions<br/>Formal Framework"]
+        memory_systems["🧮 Memory Systems<br/>RAG & Retrieval"]
+        agent_comm["🤝 Agent Communication<br/>Multi-agent Systems"]
+        tool_use["🛠️ Tool Use & Function Calling<br/>Integration Methods"]
+        future_work["🔮 Future Directions<br/>Research Opportunities"]
+    end
+    
+    %% Missing Components Subgraph (Analysis findings)
+    subgraph missing["❌ Missing Components"]
+        source_code["💻 Source Code<br/>Implementation Examples"]
+        tests["🧪 Tests<br/>Validation Scripts"]
+        ci_cd["⚡ CI/CD<br/>Automation Pipeline"]
+        examples["📝 Examples<br/>Usage Demonstrations"]
+        docs_site["🌐 Documentation Site<br/>Static Site Generation"]
+    end
+    
+    %% Relationships - Repository to Main Components
+    repo --> docs
+    repo --> assets_group
+    repo --> content_domains
+    repo --> academic_structure
+    repo --> missing
+    
+    %% Documentation Internal Relationships
+    readme --> context_eng
+    readme --> related_surveys
+    readme --> techniques
+    readme --> evaluation
+    readme --> applications
+    readme --> definitions
+    readme --> memory_systems
+    readme --> agent_comm
+    readme --> tool_use
+    readme --> future_work
+    
+    %% Asset Relationships
+    wechat --> readme
+    cover --> readme
+    
+    %% Cross-domain Relationships
+    context_eng --> definitions
+    techniques --> memory_systems
+    techniques --> agent_comm
+    techniques --> tool_use
+    evaluation --> applications
+    applications --> future_work
+    
+    %% Missing Component Relationships (what should exist)
+    source_code -.->|"Should implement"| techniques
+    tests -.->|"Should validate"| source_code
+    ci_cd -.->|"Should automate"| tests
+    examples -.->|"Should demonstrate"| techniques
+    docs_site -.->|"Should organize"| readme
+    
+    %% Styling Classes
+    classDef fileNode fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef functionNode fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
+    classDef configNode fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px,color:#000
+    classDef contentNode fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
+    classDef missingNode fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000,stroke-dasharray: 5 5
+    classDef repoNode fill:#f1f8e9,stroke:#33691e,stroke-width:3px,color:#000
+    
+    %% Apply Styling
+    class repo repoNode
+    class readme,cover,wechat fileNode
+    class license,gitignore configNode
+    class context_eng,related_surveys,techniques,evaluation,applications,definitions,memory_systems,agent_comm,tool_use,future_work contentNode
+    class source_code,tests,ci_cd,examples,docs_site missingNode
